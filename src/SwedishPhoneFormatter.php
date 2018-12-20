@@ -47,35 +47,37 @@ class SwedishPhoneFormatter
     return '0' . preg_replace('/^0/', '', $number);
   }
 
-  protected function formatRest($rest)
+  protected function formatRest($rest, $number_separator)
   {
     switch (strlen($rest)) {
       case 5:
-        return substr($rest, 0, 3) . ' ' . substr($rest, 3);
+        return substr($rest, 0, 3) .
+          $number_separator .
+          substr($rest, 3);
       case 6:
         return substr($rest, 0, 2) .
-          ' ' .
+          $number_separator .
           substr($rest, 2, 2) .
-          ' ' .
+          $number_separator .
           substr($rest, 4);
       case 7:
         return substr($rest, 0, 3) .
-          ' ' .
+          $number_separator .
           substr($rest, 3, 2) .
-          ' ' .
+          $number_separator .
           substr($rest, 5);
       case 8:
         return substr($rest, 0, 3) .
-          ' ' .
+          $number_separator .
           substr($rest, 3, 3) .
-          ' ' .
+          $number_separator .
           substr($rest, 6);
       default:
         return $rest;
     }
   }
 
-  protected function splitNumber($number)
+  protected function splitNumber($number, $number_separator)
   {
     $areaCodeSeparatorIndex = $this->getAreaCodeDigitCount(
       $number
@@ -84,7 +86,7 @@ class SwedishPhoneFormatter
     $rest = substr($number, $areaCodeSeparatorIndex);
     return [
       'areaCode' => $areaCode,
-      'rest' => $this->formatRest($rest),
+      'rest' => $this->formatRest($rest, $number_separator),
     ];
   }
 
@@ -101,8 +103,11 @@ class SwedishPhoneFormatter
     );
   }
 
-  public function format($number, $separator = '-')
-  {
+  public function format(
+    $number,
+    $area_code_separator = '-',
+    $number_separator = ' '
+  ) {
     if (!$this->isFormattable($number)) {
       return $number;
     }
@@ -111,7 +116,10 @@ class SwedishPhoneFormatter
         $this->removeExtension($number)
       );
       if (strlen($cleanedUpNumber) <= 8) {
-        return $this->formatRest($cleanedUpNumber);
+        return $this->formatRest(
+          $cleanedUpNumber,
+          $number_separator
+        );
       }
     }
     $split = $this->splitNumber(
@@ -119,8 +127,11 @@ class SwedishPhoneFormatter
         $this->ensurePrefixes(
           $this->removeExtension($number)
         )
-      )
+      ),
+      $number_separator
     );
-    return $split['areaCode'] . $separator . $split['rest'];
+    return $split['areaCode'] .
+      $area_code_separator .
+      $split['rest'];
   }
 }

@@ -24,6 +24,12 @@ final class SwedishPhoneFormatterTest extends TestCase
       $formatter->format('081234567', ' ')
     );
 
+    // Changes the area code and number separators
+    $this->assertEquals(
+      '08-1234567',
+      $formatter->format('081234567', '-', '')
+    );
+
     // Removes +46 country prefix and extension numbers
     $this->assertEquals(
       '08-123 45 67',

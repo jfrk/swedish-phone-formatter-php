@@ -11,6 +11,9 @@ $formatter->format('081234567');  // '08-123 45 67'
 // Changes the area code separator
 $formatter->format('081234567', ' ');  // '08 123 45 67'
 
+// Changes the area code and number separators
+$formatter->format('081234567', '-', '');  // '08-1234567'
+
 // Removes +46 country prefix and extension numbers
 $formatter->format('+46 (0) 81234567');  // '08-123 45 67'
 
