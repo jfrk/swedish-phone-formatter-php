@@ -101,7 +101,7 @@ class SwedishPhoneFormatter
     );
   }
 
-  public function format($number, $separator = ' ')
+  public function format($number, $separator = '-')
   {
     if (!$this->isFormattable($number)) {
       return $number;
