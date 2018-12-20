@@ -1,0 +1,21 @@
+{
+    "name": "jfrk/swedish-phone-formatter",
+    "description": "Formatter for Swedish phone numbers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fredrik Johansson",
+            "email": "jeanfredrik@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
