@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "prettier": "^1.15.3"
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/SwedishPhoneFormatterTest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfrk/swedish-phone-formatter-php.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jfrk/swedish-phone-formatter-php/issues"
+  },
+  "homepage": "https://github.com/jfrk/swedish-phone-formatter-php#readme"
+}
